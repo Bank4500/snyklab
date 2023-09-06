@@ -1,28 +1,9 @@
 name: "StackHawk"
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '35 11 * * 5'
-
 jobs:
-  stackhawk:
-    name: StackHawk
-    runs-on: ubuntu-20.04
+  stackhawk-hawkscan:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Start your service
-        run: ./your-service.sh &  
-
-      - name: Run HawkScan
-        uses: stackhawk/hawkscan-action@v2
-        continue-on-error: true                   # ✏️ Set to false to break your build on scan errors
-        with:
-          apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}
-          codeScanningAlerts: true
-          githubToken: ${{ github.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 }}
+    - uses: actions/checkout@v2
+    - uses: stackhawk/hawkscan-action@v2.1.0
+      with:
+        apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}

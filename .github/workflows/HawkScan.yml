@@ -3,10 +3,15 @@ on:
   push:
   pull_request:
 jobs:
-  stackhawk-hawkscan:
+  hawkscan:
+    name: HawkScan
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: stackhawk/hawkscan-action@v2.1.0
-      with:
-        apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: Run Nginx
+        run: docker run --rm --detach --publish 8080:80 --name nginx_test nginx
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}

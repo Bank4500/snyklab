@@ -1,0 +1,8 @@
+jobs:
+  stackhawk-hawkscan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: stackhawk/hawkscan-action@v2.1.0
+      with:
+        apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}

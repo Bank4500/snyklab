@@ -12,4 +12,4 @@ jobs:
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
         with:
-          apiKey: ${{ qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}
+          apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}

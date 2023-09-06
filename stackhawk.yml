@@ -20,4 +20,4 @@ jobs:
         with:
           apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}
           codeScanningAlerts: true
-          githubToken: ${{ github.token.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 }}
+          githubToken: ${{ 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 }}

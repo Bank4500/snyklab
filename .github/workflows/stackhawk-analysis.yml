@@ -34,30 +34,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-    - cron: '15 22 * * 5'
-
-permissions:
-  contents: read
-
-jobs:
-  stackhawk:
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for stackhawk/hawkscan-action to upload code scanning alert info
-    name: StackHawk
-    runs-on: ubuntu-20.04
+  jobs:
+  stackhawk-hawkscan:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Start your service
-        run: ./your-service.sh &                  # ✏️ Update this to run your own service to be scanned
-
-      - name: Run HawkScan
-        uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
-        continue-on-error: true                   # ✏️ Set to false to break your build on scan errors
-        with:
-          apiKey: ${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }}
-          codeScanningAlerts: true
-          githubToken: ${{ github.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 }}
+    - uses: actions/checkout@v2
+    - uses: stackhawk/hawkscan-action@v2.1.0
+    with:
+      installCLIOnly: true
+    - name: Run CLI Scan
+      run: hawk --api-key=${{ secrets.hawk.qNsKNu3F7ErVUhLVFqVE.NddZYji1fNaC7SB68yq4 }} scan
